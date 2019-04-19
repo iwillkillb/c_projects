@@ -1,0 +1,51 @@
+순환이 아닌 경우 :
+
+#include <iostream>
+using namespace std;
+int Recursion(int val);
+int main(){
+	int val;
+	
+	cout << "숫자를 입력하세요 : ";
+	cin >> val;
+	cout << endl << val << "! = " << Recursion(val) << endl;
+	
+	return 0;
+}
+
+int Recursion(int val){
+	for(int a=val-1 ; a>1 ; a--)val *= a;
+	return val;
+}
+
+
+
+
+순환인 경우 :
+
+#include <iostream>
+using namespace std;
+void Recursion(double &val, int &count);
+int main(){
+	double val;
+	int count;
+	
+	cout << "숫자를 입력하세요 : ";
+	cin >> val;
+	count = val;
+	cout << endl << val << "! = ";
+	
+	Recursion(val, count);
+	
+	cout << val << endl;
+	
+	return 0;
+}
+
+void Recursion(double &val, int &count){
+	if(count>1){
+		val *= --count;
+		Recursion(val, count);
+	}
+	
+}

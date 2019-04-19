@@ -1,0 +1,135 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+enum {SCISSORS = 0, ROCK = 1, PAPER = 2};
+
+int PlayerChoice();
+int EnemyChoice();
+void GameManager(int player, int enemy);
+void PrintIcon(int icon);
+
+void PrintIcon(char* select){
+	if(select == "ad"){
+		printf("AD");
+	}
+}
+
+int main(int argc, char** argv) {
+	int player, enemy;
+	
+	while(1){
+		player = PlayerChoice();
+		enemy = EnemyChoice();
+		GameManager(player, enemy);
+	}
+	
+	return 0;
+}
+
+
+
+int PlayerChoice(){
+	int choice;
+	
+	printf("\n당신의 선택은?(0:가위, 1:바위, 2:보)-> ");
+	scanf("%d", &choice);
+	while(!(0<=choice && choice<=2)){
+		printf("\n0~2 범위 내의 수만 입력해주세요.(0:가위, 1:바위, 2:보)-> ");
+		scanf("%d", &choice);
+	}
+	
+	return choice;
+}
+
+
+
+int EnemyChoice(){
+	int choice;
+	
+	srand(time(NULL));
+	choice = rand() % 3;
+	
+	return choice;
+}
+
+
+
+void GameManager(int player, int enemy){
+	
+	PrintIcon(player);
+	printf("       VS       \n");
+	PrintIcon(enemy);
+	
+	if(player == enemy){
+		printf("     무승부     \n");
+	}
+	else {
+		switch(player){
+			case SCISSORS:
+				if(enemy==ROCK){
+					printf("      패배      \n");
+				}
+				else if(enemy==PAPER){
+					printf("      승리      \n");
+				}
+				break;
+				
+			case ROCK:
+				if(enemy==PAPER){
+					printf("      패배      \n");
+				}
+				else if(enemy==SCISSORS){
+					printf("      승리      \n");
+				}
+				break;
+				
+			case PAPER:
+				if(enemy==SCISSORS){
+					printf("      패배      \n");
+				}
+				else if(enemy==ROCK){
+					printf("      승리      \n");
+				}
+				break;
+			default:
+				printf("     무승부     \n");
+				break;
+		}
+	}
+}
+
+
+
+void PrintIcon(int icon){
+	if(icon == SCISSORS){
+		printf("　　　　■■　　\n");
+		printf("　　　　■　■　\n");
+		printf("■■■■■　■　\n");
+		printf("■　■　■　■　\n");
+		printf("■　■　■■■■\n");
+		printf("■■■■■　　■\n");
+		printf("　■　　　　■　\n");
+		printf("　　■■■■　　\n");
+	}
+	else if(icon == ROCK){
+		printf("　　　　　　　　\n");
+		printf("■■■■■■■　\n");
+		printf("■　■　■　■　\n");
+		printf("■　■　■■■■\n");
+		printf("■■■■■　　■\n");
+		printf("　■　　■■■■\n");
+		printf("　■　　　　■　\n");
+		printf("　■■■■■■　\n");
+	}
+	else if(icon == PAPER){
+		printf("　　■■■■　　\n");
+		printf("　■■　■　■　\n");
+		printf("■　■　■　■　\n");
+		printf("■　■　■　■■\n");
+		printf("■■■■■■　■\n");
+		printf("■　　　■　　■\n");
+		printf("　■　　　　■　\n");
+		printf("　　■■■■　　\n");		
+	}
+}
